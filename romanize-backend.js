@@ -33,7 +33,7 @@ app.post("/romanize", async (req, res) => {
         Romanization: ... || IPA: ...`;
 
         // Llamamos al modelo de Gemini
-        const response = await genAI.models.generateContent({model: "gemini-2.5-flash", contents: prompt });
+        const response = await genAI.models.generateContent({model: "gemini-2.5-flash-lite", contents: prompt, config: {thinkingConfig: {thinkingBudget: 0},},});
 
         // Texto plano
         const rawText = response.text;
@@ -60,6 +60,7 @@ function parseRomanization(text) {
 }
 
 app.listen(port, () => {console.log(`Servidor de romanización con Gemini en http://localhost:${port}`)});
+
 
 
 
