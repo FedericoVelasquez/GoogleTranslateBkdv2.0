@@ -9,3 +9,4 @@ Aplicación web para traducción y detección de idiomas que aprovecha las APIs 
 1. Using the Translator and Language Detector APIs [Using the Translator and Language Detector APIs](https://developer.mozilla.org/en-US/docs/Web/API/Translator_and_Language_Detector_APIs/Using)
 2. Language detection with built-in AI [Language detection with built-in AI](https://developer.chrome.com/docs/ai/language-detection)
 3. Translation with built-in AI [Translation with built-in AI](https://developer.chrome.com/docs/ai/translator-api)
+3. Text Generation API-Gemini [Text Generation API-Gemini](https://ai.google.dev/gemini-api/docs/text-generation?hl=es-419)
