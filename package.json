@@ -1,0 +1,24 @@
+{
+  "name": "api_gemini",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "API en Express para romanización con Google Gemini",
+  "main": "romanize-backend.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node romanize-backend.js",
+    "dev": "nodemon romanize-backend.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.16.1",
+  "dependencies": {
+    "@google/genai": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "dotenv": "^17.2.2"
+  }
+}
