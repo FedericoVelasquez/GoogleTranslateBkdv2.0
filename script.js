@@ -86,7 +86,7 @@ class GoogleTranslator {
         this.inputText.addEventListener('input', () => {
       // actualizar el contador de letras
         this.debounceTranslate(); 
-        // ✅ Usar this.eraserButton (el elemento), no borrarBtn (la función)
+        //  Usar this.eraserButton (el elemento), no borrarBtn (la función)
         this.eraserButton.classList.toggle('visible', this.inputText.value.trim().length > 0)
     })
 
@@ -147,35 +147,28 @@ class GoogleTranslator {
 
     if (sourceLanguage === targetLanguage) return text
 
-    // 1. Revisar o verificar si realmente tenemos disponibilidad de esta traducción entre origen y destino
+    // Revisar o verificar si realmente tenemos disponibilidad de esta traducción entre origen y destino
     try {
-        const status = await window.Translator.availability({
-        sourceLanguage,
-        targetLanguage
-    })
+        const status = await window.Translator.availability({sourceLanguage, targetLanguage})
 
     if (status === 'unavailable') {
     throw new Error(`Traducción de ${sourceLanguage} a ${targetLanguage} no disponible`)
     }
 } catch (error) {
     console.error(error)
-    
     throw new Error(`Traducción de ${sourceLanguage} a ${targetLanguage} no disponible`)
 }
 
-    // 2. Realizar la traducción
+    // Realizar la traducción
     const translatorKey = `${sourceLanguage}-${targetLanguage}`
 
     try {
         if (!this.currentTranslator || this.currentTranslatorKey !== translatorKey) {
-            this.currentTranslator = await window.Translator.create({
-            sourceLanguage,
-            targetLanguage,
-            monitor: (monitor) => {
+            this.currentTranslator = await window.Translator.create({sourceLanguage, targetLanguage, monitor: (monitor) => {
                 monitor.addEventListener("downloadprogress", (e) => {
                 this.outputText.innerHTML = `<span class="loading">Descargando modelo: ${Math.floor(e.loaded * 100)}%</span>`
                 })
-            }
+                }
             })
         }
     
@@ -196,7 +189,7 @@ class GoogleTranslator {
         this.outputRomanization.textContent = '' // Limpiar también la pronunciación
         this.outputIPA.textContent = ''
         this.inputTextPronunciation.textContent = ''
-        this.resetDetectedLanguage() // ✅ reiniciar el confidence
+        this.resetDetectedLanguage() //  reiniciar el confidence
         return
         }
 
@@ -204,8 +197,6 @@ class GoogleTranslator {
 
         if (this.sourceLanguage.value === 'auto') {
             if (text.length > 1) {
-                /*const detectedLanguage = await this.detectLanguage(text)
-                this.updateDetectedLanguage(detectedLanguage, result[0])*/
                 const { detectedLanguage, confidence } = await this.detectLanguage(text)
                 this.updateDetectedLanguage(detectedLanguage, { confidence })
             }else{
@@ -223,8 +214,7 @@ class GoogleTranslator {
         // Verificar si el idioma de origen es no latino
         if (GoogleTranslator.NOT_LATIN_LANGUAGES.includes(this.sourceLanguage.value)) {
             const inputRomanization = await this.getRomanization(text, this.sourceLanguage.value);
-            this.inputTextPronunciation.textContent = inputRomanization.romanization
-            ? `Romanization: ${inputRomanization.romanization}\nIPA: ${inputRomanization.ipa ?? ''}`: '';
+            this.inputTextPronunciation.textContent = inputRomanization.romanization ? `Romanization: ${inputRomanization.romanization}\nIPA: ${inputRomanization.ipa ?? ''}`: '';
         }
 
         const translation = await this.getTranslation(text)
@@ -249,7 +239,6 @@ class GoogleTranslator {
         }
 
         this.outputText.textContent = 'Error al traducir'
-        //this.outputTextPronunciation.textContent = 'Error en la romanización'
         this.inputTextPronunciation.textContent = 'Error en la romanización'
         }
     }
@@ -305,9 +294,7 @@ class GoogleTranslator {
         recognition.continuous = false
         recognition.interimResults = false
 
-        const language = this.sourceLanguage.value === 'auto'
-        ? this.normalizeLanguageCode((await this.detectLanguage(this.inputText.value)).detectedLanguage)
-        : this.sourceLanguage.value
+        const language = this.sourceLanguage.value === 'auto' ? this.normalizeLanguageCode((await this.detectLanguage(this.inputText.value)).detectedLanguage) : this.sourceLanguage.value
 
         recognition.lang = this.getFullLanguageCode(language)
         
@@ -397,10 +384,7 @@ class GoogleTranslator {
         const detectedLanguage = results[0]?.detectedLanguage
         const confidence = results[0]?.confidence
 
-        return {
-            detectedLanguage: detectedLanguage === 'und' ? GoogleTranslator.DEFAULT_SOURCE_LANGUAGE : detectedLanguage,
-            confidence
-        }
+        return {detectedLanguage: detectedLanguage === 'und' ? GoogleTranslator.DEFAULT_SOURCE_LANGUAGE : detectedLanguage, confidence}
         } catch (error) {
         console.error("No he podido averiguar el idioma: ", error)
         return GoogleTranslator.DEFAULT_SOURCE_LANGUAGE
@@ -437,7 +421,7 @@ class GoogleTranslator {
                     text,
                     language
                 })
-                //signal: this.romanizeController.signal // 👈 aquí va el controlador
+                signal: this.romanizeController.signal // controlador
             })
 
             if (!response.ok) {
@@ -449,8 +433,7 @@ class GoogleTranslator {
 
         } catch (error) {
             
-            if (error.name === 'AbortError') {
-            console.log('✅ Request cancelada (nuevo input recibido)');
+            if (error.name === 'AbortError') {console.log('✅ Request cancelada (nuevo input recibido)');
             return { romanization: null, ipa: null };
             }
             
@@ -462,4 +445,5 @@ class GoogleTranslator {
 
 const googleTranslator = new GoogleTranslator()
 window.googleTranslator = googleTranslator
+
 
