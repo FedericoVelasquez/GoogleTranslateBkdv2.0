@@ -214,24 +214,6 @@ select {
     }
 }
 
-#inputTextPronunciation {
-    font-size: 0.85em;
-    font-style: italic;
-    color: #777;
-    margin-left: 8px;
-    display: block;
-}
-
-#outputTextPronunciation {
-    font-size: 0.85em;
-    font-style: italic;
-    color: #777;
-    margin-left: 8px;
-    display: block;
-    background-color: var(--bg-secondary);
-    color: var(--text-primary);
-}
-
 #outputRomanization,
 #outputIPA {
     font-size: 0.9rem;
@@ -249,6 +231,7 @@ select {
     font-style: italic;
     color: var(--text-secondary, #5f6368); /* Color gris similar a Google Translate */
     margin-top: 4px;
+    margin-left: 4px;
     display: block;
     white-space: pre-wrap; /* Permitir saltos de línea si es necesario */
 }
@@ -258,22 +241,14 @@ select {
     position: relative;
 }
 
-#inputTextPronunciation {
-    margin-left: 4px;
-}
-
-#outputTextPronunciation {
-    margin-left: 4px;
-}
-
 #borrarBtn {
-    position: absolute; /* ✅ Posicionamiento absoluto */
-    top: 12px;          /* ✅ Distancia desde arriba */
-    right: 12px;        /* ✅ Distancia desde la derecha */
+    position: absolute; /*  Posicionamiento absoluto */
+    top: 12px;          /*  Distancia desde arriba */
+    right: 12px;        /*  Distancia desde la derecha */
             
     /* Estilo del botón */
-    background: none;           /* ✅ Sin fondo */
-    border: none;              /* ✅ Sin borde */
+    background: none;           /*  Sin fondo */
+    border: none;              /*  Sin borde */
     font-size: 16px;
     cursor: pointer;
     padding: 4px;
@@ -281,8 +256,8 @@ select {
     color: #666;
             
     /* Transiciones suaves */
-    opacity: 0;                /* ✅ Inicialmente invisible */
-    visibility: hidden;        /* ✅ Inicialmente oculto */
+    opacity: 0;                /*  Inicialmente invisible */
+    visibility: hidden;        /*  Inicialmente oculto */
     transform: scale(0.8);
     transition: all 0.2s ease;
             
@@ -300,21 +275,12 @@ select {
     }
 }
 
-/* ✅ Clase para mostrar el botón */
+/*  Clase para mostrar el botón */
 #borrarBtn.visible {
     opacity: 1;
     visibility: visible;
     transform: scale(1);
 }
-
-/* Diseño responsive 
-@media (max-width: 768px) {
-    #borrarBtn {
-        top: 8px;
-        right: 8px;
-        font-size: 18px;
-    }
-}*/
 
 .input-controls, .output-controls {
     display: flex;
@@ -357,4 +323,5 @@ select {
 
 .google-notification.show {
     transform: translateX(-50%) translateY(0);
+
 }
