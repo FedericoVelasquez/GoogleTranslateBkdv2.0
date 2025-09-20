@@ -11,18 +11,18 @@ app.use(express.json());
 
 // Configura Gemini con tu API key
 dotenv.config();
-const genAI = new GoogleGenAI({apiKey: process.env.GOOGLE_API_KEY}); //  cámbiala por la tuya
+const genAI = new GoogleGenAI({apiKey: process.env.GOOGLE_API_KEY}); //  cámbiala por tu apikey
 
 // Endpoint para romanizar
 app.post("/romanize", async (req, res) => {
     const { text, language } = req.body;
 
     if (!text || !language) {
-        return res.status(400).json({ error: "Faltan parámetros: text y language" });
+        return res.status(400).json({ error: "Faltan parámetros: text y language" }); 
     }
     
     if (text.length > 450) {
-        return res.status(400).json({error: "El texto excede el límite de 450 caracteres para romanización"});
+        return res.status(400).json({error: "El texto excede el límite de 450 caracteres para romanización"});  //limite para input tokens 
     }
 
     try {
@@ -60,5 +60,6 @@ function parseRomanization(text) {
 }
 
 app.listen(port, () => {console.log(`Servidor de romanización con Gemini en http://localhost:${port}`)});
+
 
 
