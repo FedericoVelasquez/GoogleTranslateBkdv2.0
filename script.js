@@ -37,6 +37,7 @@ class GoogleTranslator {
         this.currentTranslator = null
         this.currentTranslatorKey = null
         this.currentDetector = null
+        this.romanizeController = null
     }
 
     init() {
@@ -55,7 +56,6 @@ class GoogleTranslator {
         this.copyButton = $('#copyButton')
         this.speakerButton = $('#speakerButton')
         this.swapLanguagesButton = $('#swapLanguages')
-        this.romanizeController = null;
 
         // Configuración inicial
         this.targetLanguage.value = GoogleTranslator.DEFAULT_TARGET_LANGUAGE
@@ -115,13 +115,12 @@ class GoogleTranslator {
         this.outputIPA.textContent = ''
         this.inputTextPronunciation.textContent = ''
         this.eraserButton.classList.remove('visible')
-        this.resetDetectedLanguage() // ✅ reiniciar el confidence
+        this.resetDetectedLanguage() // reiniciar el confidence
     }
 
     updateDetectedLanguage (detectedLanguage, result) {
         // Actualizar visualmente el idioma detectado
         let option;
-        //confidence = null
     if (detectedLanguage === 'ja-Latn') {
         option = this.sourceLanguage.querySelector(`option[value="ja"]`)
     } else {
@@ -463,3 +462,4 @@ class GoogleTranslator {
 
 const googleTranslator = new GoogleTranslator()
 window.googleTranslator = googleTranslator
+
