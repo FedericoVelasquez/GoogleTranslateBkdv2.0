@@ -420,7 +420,7 @@ class GoogleTranslator {
                 body: JSON.stringify({
                     text,
                     language
-                })
+                }),
                 signal: this.romanizeController.signal // controlador
             })
 
@@ -445,5 +445,6 @@ class GoogleTranslator {
 
 const googleTranslator = new GoogleTranslator()
 window.googleTranslator = googleTranslator
+
 
 
